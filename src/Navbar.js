@@ -31,27 +31,28 @@ const Navbar = () => {
       position: 'fixed',
       top: '0',
       left: '0',
-      bottom: '0',
-      width: '280px',
+      right: '0',
+      height: '60px',
       background: 'rgba(20, 20, 40, 0.3)',
       backdropFilter: 'blur(20px)',
-      border: 'none',
-      borderRight: '1px solid rgba(255, 255, 255, 0.1)',
+      borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
       display: 'flex',
-      flexDirection: 'column',
-      padding: '24px',
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      padding: '0 24px',
       zIndex: 1000,
       fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif'
     }}>
       {/* Logo */}
-      <div style={{ marginBottom: '40px' }}>
+      <div>
         <Logo size="medium" />
       </div>
       
       {/* Navigation Items */}
       <div style={{
         display: 'flex',
-        flexDirection: 'column',
+        flexDirection: 'row',
         gap: '12px'
       }}>
         <div 
