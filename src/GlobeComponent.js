@@ -25,20 +25,24 @@ const GlobeComponent = () => {
 
   useEffect(() => {
     // Fetch last updated time
+    // Add this at the top of the component
+    const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+    
+    // Update the fetch calls (around lines 30 and 40)
     const fetchLastUpdated = async () => {
       try {
-        const res = await fetch('http://localhost:8000/api/indices/last-updated');
+        const res = await fetch(`${API_BASE_URL}/api/indices/last-updated`);
         const json = await res.json();
         setLastUpdated(json.last_updated);
       } catch (e) {
         console.error('Failed to fetch last updated time', e);
       }
     };
-
+    
     // Fetch indices status from backend
     const fetchIndices = async () => {
       try {
-        const res = await fetch('http://localhost:8000/api/indices/status');
+        const res = await fetch(`${API_BASE_URL}/api/indices/status`);
         const json = await res.json();
         const points = (json.data || []).map((d) => ({
           lat: d.lat,
