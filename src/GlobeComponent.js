@@ -26,7 +26,10 @@ const GlobeComponent = () => {
   useEffect(() => {
     // Fetch last updated time
     // Add this at the top of the component
-    const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+    // const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+    const API_BASE_URL = window.location.hostname === 'localhost' 
+    ? 'http://localhost:8000'
+    : 'https://market-map-backend-hcezehhmakf8exca.canadacentral-01.azurewebsites.net';
     console.log('API_BASE_URL:', API_BASE_URL); // Add this line temporarily
     
     // Update the fetch calls (around lines 30 and 40)
