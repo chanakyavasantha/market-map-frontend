@@ -27,6 +27,7 @@ const GlobeComponent = () => {
     // Fetch last updated time
     // Add this at the top of the component
     const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+    console.log('API_BASE_URL:', API_BASE_URL); // Add this line temporarily
     
     // Update the fetch calls (around lines 30 and 40)
     const fetchLastUpdated = async () => {
@@ -42,8 +43,17 @@ const GlobeComponent = () => {
     // Fetch indices status from backend
     const fetchIndices = async () => {
       try {
+        console.log('Fetching from:', `${API_BASE_URL}/api/indices/status`);
         const res = await fetch(`${API_BASE_URL}/api/indices/status`);
+        console.log('Response status:', res.status);
+        console.log('Response ok:', res.ok);
+        
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        
         const json = await res.json();
+        console.log('Received data:', json);
         const points = (json.data || []).map((d) => ({
           lat: d.lat,
           lng: d.lng,
@@ -58,7 +68,8 @@ const GlobeComponent = () => {
         }));
         setIndices(points);
       } catch (e) {
-        console.error('Failed to fetch indices', e);
+        console.error('Failed to fetch indices:', e);
+        console.error('Error details:', e.message);
       }
     };
 
